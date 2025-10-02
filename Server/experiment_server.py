@@ -1,4 +1,5 @@
 # 1. Import libraries
+import os
 
 import numpy as np
 import cv2
@@ -6,6 +7,8 @@ import tensorflow
 import preprocessing
 import socket
 import time
+from dotenv import load_dotenv
+load_dotenv()
 
 
 # 2. Load model
@@ -21,9 +24,8 @@ model = tensorflow.keras.models.load_model('signs_vgg16.h5')
 
 # # 3. Accept connection from Turtlebot
 
-HOST = '0.0.0.0'
-# HOST = '127.0.0.1'
-PORT = 9898
+HOST = os.getenv('HOST')
+PORT = int(os.getenv('PORT'))
 BUFFER_SIZE = 2048
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

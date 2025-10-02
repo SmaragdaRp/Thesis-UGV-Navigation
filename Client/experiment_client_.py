@@ -9,6 +9,10 @@ from picamera import PiCamera
 import time
 import socket
 import numpy
+import os
+
+from dotenv import load_dotenv
+load_dotenv()
 
 counter = 0
 oldX = 0.0
@@ -28,9 +32,8 @@ def PositionCB(data):
 
 print("Connecting to server Maestro...")
 
-HOST = '195.134.71.234'
-# HOST = '127.0.0.1'
-PORT = 9898
+HOST = os.getenv('HOST_ADDRESS')
+PORT = int(os.getenv('PORT'))
 BUFFER_SIZE = 2048
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
